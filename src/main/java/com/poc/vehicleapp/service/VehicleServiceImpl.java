@@ -55,18 +55,33 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleRepository.findAll();
     }
 
+    /**
+     * get list of vehicles by brand.
+     * @param vehicleBrand - name of brand.
+     * @return list of vehicles.
+     */
     @Override
     public List<Vehicle> findListOfVehicleByBrand(String vehicleBrand) {
         log.info("Request to get list of vehicle by brand: {}", vehicleBrand);
         return vehicleRepository.findVehicleByBrand(vehicleBrand);
     }
 
+    /**
+     * get list of vehicle by type.
+     * @param type - of vehicle.
+     * @return list of vehicles.
+     */
     @Override
     public List<Vehicle> findListOfVehicleByType(String type) {
         log.info("Request to get list of vehicle by type: {}", type);
         return vehicleRepository.findVehicleByType(type);
     }
 
+    /**
+     * find vehicle by id.
+     * @param id - of the vehicle.
+     * @return vehicle entity.
+     */
     @Override
     public Optional<Vehicle> findById(Long id) {
         log.info("Request to get vehicle by id: {}", id);
