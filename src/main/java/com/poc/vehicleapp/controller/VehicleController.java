@@ -6,13 +6,12 @@ import com.poc.vehicleapp.entity.Bike;
 import com.poc.vehicleapp.entity.Car;
 import com.poc.vehicleapp.entity.Vehicle;
 import com.poc.vehicleapp.service.VehicleService;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -71,14 +70,53 @@ public class VehicleController {
         return ResponseEntity.ok().body(CompletableFuture.completedFuture(vehicleService.findListOfVehicleByBrand(brandName)));
     }
 
+    /**
+     *  to get list of vehicle of specific type.
+     * @param type - of the vehicle.
+     * @return list of vehicle matches the type.
+     */
 
     @GetMapping("/byTypes/{type}")
     public ResponseEntity<?> getAllVehicleByTypes(@PathVariable("type") String type) {
         return ResponseEntity.ok().body(CompletableFuture.completedFuture(vehicleService.findListOfVehicleByType(type)));
     }
 
+    /**
+     * to update the specified vehicle.
+     * @param vehicle - is a entity.
+     * @return updated vehicle.
+     */
+    @PutMapping()
+    public ResponseEntity<?> updateVehicle(@RequestBody() Vehicle vehicle) {
+        if (vehicle.getId() == null) {
+            return ResponseEntity.badRequest().body(ConstantMessages.NOT_VALID_JSON);
+        }
 
+        Optional<Vehicle> vehicleExisting = vehicleService.findById(vehicle.getId());
+        if (vehicleExisting.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
+        return ResponseEntity.ok().body(saveVehicle(vehicle));
+    }
 
+    /**
+     * to delete the specified vehicle.
+     * @param id - of the vehicle.
+     * @return Success of failure message.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteVehicle(@PathVariable("id") long id) {
+        Optional<Vehicle> existingVehicle = vehicleService.findById(id);
+        if (existingVehicle.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        try {
+            vehicleService.deleteVehicle(existingVehicle.get());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ConstantMessages.ENTITY_NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(ConstantMessages.ENTITY_HAS_BEEN_DELETED);
+    }
 
 }

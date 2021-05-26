@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -64,5 +65,11 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> findListOfVehicleByType(String type) {
         log.info("Request to get list of vehicle by type: {}", type);
         return vehicleRepository.findVehicleByType(type);
+    }
+
+    @Override
+    public Optional<Vehicle> findById(Long id) {
+        log.info("Request to get vehicle by id: {}", id);
+        return vehicleRepository.findById(id);
     }
 }
