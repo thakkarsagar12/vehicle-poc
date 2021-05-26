@@ -1,4 +1,4 @@
-package com.poc.vehicleapp.controller;
+package com.poc.vehicleapp.services;
 
 
 import com.poc.vehicleapp.config.ConstantMessages;

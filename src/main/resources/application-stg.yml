@@ -1,9 +1,9 @@
 
 spring:
   profiles:
-    active: dev
+    active: stg
   datasource:
-    url: jdbc:mysql://localhost:55003/vehicle
+    url: jdbc:mysql://db:3306/vehicle?autoReconnect=true&useSSL=false
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
