@@ -1,24 +1,3 @@
-#
-#
-#FROM gradle:7.0.2-jdk11 as builder
-#COPY . .
-#CMD gradle booJar
-##RUN java -Djarmode=layertools -jar app.jar extract
-#
-##FROM adoptopenjdk:11-jre-hotspot
-##ENV PROFILE = "stg"
-##ARG JAR_FILE=/build/libs/*.jar
-##CMD ls -a
-##COPY --from=builder ./build/libs/*.jar app.jar
-#COPY /build/libs/*.jar app.jar
-#
-##COPY --from=builder ./dependencies/ ./
-##COPY --from=builder ./snapshot-dependencies/ ./
-##COPY --from=builder ./spring-boot-loader/ ./
-##COPY --from=builder ./application/ ./
-#ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${PROFILE}", "app.jar"]
-#EXPOSE 8080
-
 # using multistage docker build
 # ref: https://docs.docker.com/develop/develop-images/multistage-build/
 

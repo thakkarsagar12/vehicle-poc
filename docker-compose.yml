@@ -29,8 +29,8 @@ services:
       - backend
 
 
-#volumes are missing
 volumes:
   db-data:
+
 networks:
   backend:
