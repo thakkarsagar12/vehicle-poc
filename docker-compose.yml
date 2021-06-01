@@ -1,22 +1,21 @@
 version: '3'
 services:
   db:
-    restart: always
     image: "mysql:5"
     environment:
       MYSQL_DATABASE: vehicle
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_ROOT_HOST: '%'
     networks:
       - backend
     ports:
       - 3306:3306
+    volumes:
+      - db-data:/var/lib/mysql
 
   vehicleapp:
     build:
       context: ./
       dockerfile: Dockerfile
-    restart: on-failure
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/vehicle?autoReconnect=true&useSSL=false
       PROFILE: stg
@@ -30,5 +29,8 @@ services:
       - backend
 
 
+#volumes are missing
+volumes:
+  db-data:
 networks:
   backend:

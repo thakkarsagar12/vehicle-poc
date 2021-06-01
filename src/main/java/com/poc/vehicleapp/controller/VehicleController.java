@@ -1,4 +1,4 @@
-package com.poc.vehicleapp.services;
+package com.poc.vehicleapp.controller;
 
 
 import com.poc.vehicleapp.config.ConstantMessages;
@@ -26,6 +26,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
         this.modelMapper = modelMapper;
     }
+
 
     /**
      * To get list of vehicles.

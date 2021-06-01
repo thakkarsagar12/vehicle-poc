@@ -1,4 +1,4 @@
-package com.poc.vehicleapp.services;
+package com.poc.vehicleapp.controller;
 
 import com.poc.vehicleapp.dao.VehicleRepository;
 import com.poc.vehicleapp.entity.Bike;
